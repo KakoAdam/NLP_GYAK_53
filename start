@@ -1,0 +1,18 @@
+modelfile = 'glove.6B.300d.txt'
+import numpy as np
+import os
+from tqdm.notebook import trange, tqdm
+
+with open(modelfile, "r") as f:
+  embeddings = {l.split()[0]: np.array(l.split()[1:]).astype('float') for l in tqdm(f, total=400001)}
+
+
+print(embeddings['king'][:6])
+
+
+dist_kq = np.linalg.norm(embeddings['king'] - embeddings['queen'])
+print(dist_kq)
+dist_kc = np.linalg.norm(embeddings['king'] - embeddings['car'])
+print(dist_kc)
+dist_km = np.linalg.norm(embeddings['king'] - embeddings['man'])
+print(dist_km)
